@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        background-image: linear-gradient(white,rgb(255, 136, 0));
+        height: 400px;
+        width: 600px;
+        border-radius: 10px;
+        color: darkred;
+        font-weight: 1000;
+        margin-left: 410px;
+        margin-top: 160px;
+        text-align: center;
+        opacity: 80%;
+
+        
+    }
+    body{
+        background-image: url("https://w0.peakpx.com/wallpaper/819/635/HD-wallpaper-night-walk-city-city-lights-nature-walk-rain-road-lights-rainy.jpg");
+    }
+    input{
+        width: 400px;
+        height: 40px;
+        font-size: 25px;
+    }
+    span{
+        font-size: 30px;
+    }
+    button{
+        font-size: 26px
+    }
+    .sp{
+        border-style: double;
+        background-color: aqua;
+
+    }
+
+</style>
+<body>
+    <div class="box">
+        <input type="search" id="city" placeholder="Enetr Your City">
+        <button onclick="getData()"><b>&#128269</b></button> <br>
+        <div class="sp">
+        <span id="info"></span><br><br><br>
+        <span id="temp"></span><br>
+        <span id="cloud" ></span><br>
+        <span id="humidity"></span><br>
+        <span id="wind"></span>
+        </div>
+    </div>
+    <script>
+    async function getData(){
+        const cityName = document.getElementById('city').value;
+
+        const api =`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=4d3ebb804fc319994c971a07e6a8e45a`;
+
+        const res =await fetch(api);
+        const data =await res.json();
+
+        document.getElementById("info").innerHTML=`weather in ${cityName}`;
+        document.getElementById("temp").innerHTML=`${Math.trunc(data.main.temp/10)} °C`;
+        document.getElementById("cloud").innerHTML=`pressure:${data.main.pressure/1000}kg/m^3`;
+        document.getElementById("humidity").innerHTML=`humidity:${data.main.humidity} %`;
+        document.getElementById("wind").innerHTML=`wind:${data.wind.speed}km/h`;
+
+    }
+        
+ 
+
+    </script>
+    
+</body>
+</html>
